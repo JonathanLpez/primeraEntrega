@@ -3,10 +3,7 @@ const {
 } = require('express')
 
 const router = Router();
-/*
-const path= "./"
-const fileName = 'productos.json'*/
-const file = './productos.json'
+const file = './products/productos.json'
 
 const ProductManager = require('../class/productManager.js')
 const prodManager = new ProductManager(file)
