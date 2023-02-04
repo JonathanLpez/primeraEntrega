@@ -101,7 +101,7 @@ class ProductManager {
         prod.status = status
 
         await fs.promises.writeFile(this.file, JSON.stringify(this.products))
-            return `Producto modificado con id ${prod.id}`
+        return `Producto modificado con id ${prod.id}`
         } catch (error) {
             return 'Error al modificar producto'
         }

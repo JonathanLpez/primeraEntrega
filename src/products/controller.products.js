@@ -15,13 +15,19 @@ router.get('/', async (req, res) => {
 
     try {
         const products = await prodManager.getProducts();
-
-        if (limit > 0) {
-            const newArray = products.slice(0, limit)
-            res.status(200).json(newArray)
-        } else {
-            res.status(200).json(products)
+        console.log(products)
+        if(products.length == 0){
+            res.status(200).json({message: "Not found products in db"})
         }
+        else{ 
+            if (limit > 0) {
+                const newArray = products.slice(0, limit)
+                res.status(200).json(newArray)
+            } else {
+                res.status(200).json(products)
+            }
+        }
+       
 
     } catch (error) {
         res.status(500).json({
@@ -88,8 +94,8 @@ router.put('/:pid', async(req, res)=>{
     const {code,title,description,price,thumbail,stock,status} = req.body
 
     try {
-        await prodManager.updateById(pid, code, title, description, price,thumbail,stock,status)
-        res.status(201).json({message: `producto con id ${pid} modificado`})
+        const prodModify = await prodManager.updateById(pid, code, title, description, price,thumbail,stock,status)
+        res.status(201).json(prodModify)
     } catch (error) {
         res.status(500).json({
             error: "error"
@@ -105,8 +111,8 @@ router.delete('/:id', async (req, res) => {
     const id = Number(req.params.id)
 
     try {
-        await prodManager.deteleById(id)
-        res.status(204).json(`El producto con id ${id} fue borrado`)
+        const prodDelete = await prodManager.deteleById(id)
+        res.status(201).json(prodDelete)
     } catch (error) {
         res.status(500).json({
             error: "error"
