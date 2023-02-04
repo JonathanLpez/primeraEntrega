@@ -11,10 +11,10 @@ class CartManager {
 
         try {
             this.carts = JSON.parse(fs.readFileSync(this.file))
-            console.log("Archivo cart existente")
+            console.log("Data base Cart online")
         } catch (error) {
             fs.writeFileSync(this.file, JSON.stringify([]));
-            console.log('Datos creados')
+            console.log('Data base Cart created')
         }
     }
 

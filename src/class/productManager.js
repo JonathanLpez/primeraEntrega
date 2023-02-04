@@ -9,11 +9,11 @@ class ProductManager {
 
         try {
             this.products = JSON.parse(fs.readFileSync(this.file))
-            console.log('archivo existente')
+            console.log('Data base Products online')
         } catch (error) {
 
             fs.writeFileSync(this.file, JSON.stringify([]));
-            console.log('Datos creados')
+            console.log('Data base Products created')
         }
 
     }

@@ -2,6 +2,8 @@ const {
     Router
 } = require('express')
 
+const uploader = require('../multer.js')
+
 const router = Router();
 const file = './products/productos.json'
 
@@ -54,14 +56,15 @@ router.get('/:pid', async (req, res) => {
 
 // Agregar producto
 
-router.post('/', async (req, res) => {
+router.post('/', uploader.single('thumbail') , async (req, res) => {
+
+    const thumbail = req.file.path
 
     const {
         code,
         title,
         description,
         price,
-        thumbail,
         stock,
         status
     } = req.body
@@ -81,7 +84,6 @@ router.post('/', async (req, res) => {
             })
         }
     }
-
 })
 
 // Actualizar producto
