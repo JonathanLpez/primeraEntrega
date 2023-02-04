@@ -15,7 +15,6 @@ router.get('/', async (req, res) => {
 
     try {
         const products = await prodManager.getProducts();
-        console.log(products)
         if(products.length == 0){
             res.status(200).json({message: "Not found products in db"})
         }
@@ -90,7 +89,6 @@ router.post('/', async (req, res) => {
 router.put('/:pid', async(req, res)=>{
 
     const pid =Number(req.params.pid)
-    console.log(pid)
     const {code,title,description,price,thumbail,stock,status} = req.body
 
     try {
