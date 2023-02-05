@@ -9,6 +9,7 @@ class ProductManager {
 
         try {
             this.products = JSON.parse(fs.readFileSync(this.file))
+            console.log(typeof(this.products))
             console.log('Data base Products online')
         } catch (error) {
 
