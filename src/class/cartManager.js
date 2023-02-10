@@ -6,7 +6,7 @@ class CartManager {
     constructor(file) {
         this.file = file
         this.carts = []
-        this.products = JSON.parse(fs.readFileSync('./products/productos.json'))
+        this.products = JSON.parse(fs.readFileSync('primeraEntrega\src\products\productos.json'))
         this.idCart = 0
 
         try {

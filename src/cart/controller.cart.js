@@ -3,7 +3,7 @@ const {
 } = require('express')
 const router = Router();
 
-const file = './cart/cart.json'
+const file = 'primeraEntrega\src\cart\cart.json'
 
 const CartManager = require('../class/cartManager.js')
 const cartManager = new CartManager(file)

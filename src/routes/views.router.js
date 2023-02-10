@@ -3,7 +3,7 @@ const {
 } = require('express')
 const router = Router()
 const fs = require('fs')
-const file = './products/productos.json'
+const file = 'primeraEntrega\src\products\productos.json'
 
 const products = JSON.parse(fs.readFileSync(file))
 router.get('/', (req, res) => {

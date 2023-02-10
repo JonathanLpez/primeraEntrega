@@ -5,7 +5,7 @@ const {
 const uploader = require('../multer.js')
 
 const router = Router();
-const file = './products/productos.json'
+const file = 'primeraEntrega\src\products\productos.json'
 
 const ProductManager = require('../class/productManager.js')
 const prodManager = new ProductManager(file)

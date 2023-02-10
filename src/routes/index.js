@@ -7,7 +7,7 @@ const router = (app)=>{
     app.use('/api/products', controllerProducts)
     app.use('/api/carts', controllerCart)
     app.use('/handlebarsProducts', viewsRouter)
-    app.use('/productsRealTime', routerSocketio )
+    app.use('/realTimeProducts', routerSocketio )
 }
 
 module.exports = router
