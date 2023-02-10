@@ -16,7 +16,6 @@ router.post('/', async (req, res) => {
 
 router.get('/:cid', async (req, res) => {
     const cid = req.params.cid
-
     try {
         const cart = await cartManager.getCartID(cid)
         res.status(200).json(cart)
@@ -30,7 +29,6 @@ router.get('/:cid', async (req, res) => {
 
 router.post('/:cid/product/:pid', async (req, res)=>{ 
     const {cid, pid} = req.params
-
     try {
         const cart = await cartManager.postProductInCart(cid,pid)
         res.status(201).json(cart)

@@ -21,8 +21,6 @@ class CartManager {
     async newCart() {
 
         this.idCart = this.carts.length + 1
-        console.log(this.idCart)
-
         const cart = {
             id: this.idCart,
             products: []
