@@ -1,3 +1,74 @@
-<h1> Socket.io</h1>
+<nav class="navbar navbar-light bg-light">
+    <div class="container-fluid">
+        <a class="navbar-brand" href="#">
+            <img src="/docs/5.0/assets/brand/bootstrap-logo.svg" alt="" width="30" height="24"
+                class="d-inline-block align-text-top">
+            RealTimeProducts
+        </a>
+    </div>
+</nav>
+
+<div class="container-fluid">
+    <div class="row">
+        <div class="col col-lg-2">
+            <form>
+                <div class="mb-3">
+                    <label for="" class="form-label">Titulo del producto</label>
+                    <input type="text" class="form-control" id="" aria-describedby="">
+                    <label for="" class="form-label">Code del producto</label>
+                    <input type="number" class="form-control" id="" aria-describedby="emailHelp">
+                    <label for="" class="form-label">Descripcion del producto</label>
+                    <input type="text" class="form-control" id="" aria-describedby="emailHelp">
+                    <label for="" class="form-label">Precio del producto</label>
+                    <input type="number" class="form-control" id="" aria-describedby="emailHelp">
+                    <label for="" class="form-label">Imagen del producto</label>
+                    <input type="file" class="form-control" id="" aria-describedby="emailHelp">
+                    <label for="" class="form-label">Stock del producto</label>
+                    <input type="number" class="form-control" id="" aria-describedby="emailHelp">
+                </div>
+                <button type="submit" class="btn btn-primary">Agregar producto</button>
+            </form>
+        </div>
+        <div class="col col-lg-2">
+            <form>
+                <div class="mb-3">
+                    <label for="" class="form-label">Ingresa el id del producto a eliminar </label>
+                    <input type="number" class="form-control" id="" aria-describedby="">
+                </div>
+                <button type="submit" class="btn btn-danger">Borrar producto</button>
+            </form>
+        </div>
+
+        <div class="col col-lg-8">
+            <table class="table table-dark table-striped ">
+                <thead>
+                    <tr>
+                        <th scope="col">ID</th>
+                        <th scope="col">CODE</th>
+                        <th scope="col">TITLE</th>
+                        <th scope="col">DESCRIPCION</th>
+                        <th scope="col">PRECIO</th>
+                        <th scope="col">STOCK</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    {{#each products}}
+                    <tr> 
+                        <th scope="row">{{this.id}}</th>
+                        <td>{{this.code}}</td>
+                        <td>{{this.title}}</td>
+                        <td>{{this.description}}</td>
+                        <td>{{this.price}}</td>
+                        <td>{{this.stock}}</td>
+                    </tr>
+                    {{/each}}
+                </tbody>
+            </table>
+        </div>
+
+
+    </div>
+</div>
+
 <script src="/socket.io/socket.io.js"></script>
 <script src="/js/index.js"></script>

@@ -9,7 +9,8 @@ const products = JSON.parse(fs.readFileSync(file))
 router.get('/', (req, res) => {
     res.render('home', {
         products,
-        style: 'styles.css'
+        style: 'styles.css',
+        title: "Products"
     })
 })
 

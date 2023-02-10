@@ -1,8 +1,26 @@
 <h1> Hola desde productos</h1>
 <h2>Prueba</h2>
-{{#each products}}
-<div>
-    <p>{{this.id}}</p>
-    <p>{{this.title}}</p>
-</div>
-{{/each}}
+<table class="table">
+    <thead>
+        <tr>
+            <th scope="col">ID</th>
+            <th scope="col">CODE</th>
+            <th scope="col">TITLE</th>
+            <th scope="col">DESCRIPCION</th>
+            <th scope="col">PRECIO</th>
+            <th scope="col">STOCK</th>
+        </tr>
+    </thead>
+    <tbody>
+        {{#each products}}
+        <tr>
+            <th scope="row">{{this.id}}</th>
+            <td>{{this.code}}</td>
+            <td>{{this.title}}</td>
+            <td>{{this.description}}</td>
+            <td>{{this.price}}</td>
+            <td>{{this.stock}}</td>
+        </tr>
+        {{/each}}
+    </tbody>
+</table>
