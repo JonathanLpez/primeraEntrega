@@ -14,7 +14,7 @@ const stock = document.getElementById('stock')
 // Pintar lista en html
 const lista = document.getElementById('listProducts')
 
-const funcionPintarHtml = (data)=>{ 
+const funcionPintarHtml = (data) => {
     data.forEach(product => {
         let tr = document.querySelector(`tr[data-id="${product.id}"]`);
         if (!tr) {
@@ -59,7 +59,7 @@ prodAdd.addEventListener('click', (e) => {
             alert(data)
         })
 
-        
+
 
     } else {
         alert("Ingresa los datos completos ; Title, Code, Description y Price")
@@ -72,17 +72,17 @@ prodAdd.addEventListener('click', (e) => {
 const prodByID = document.getElementById('prodID')
 
 // Funcion delete btn
-deleteBtn.addEventListener('click', (e) => {
+deleteBtn.addEventListener('click', async (e) => {
     e.preventDefault()
     const id = prodByID.value
     if (id != "" && id > 0) {
         socket.emit('borrar', id)
         prodByID.value = " "
-
         socket.on('deleted-exitoso', (data) => {
+            let tr = document.querySelector(`tr[data-id="${id}"]`);
+            tr.remove();
             alert(data)
         })
-
     } else {
         alert("Ingresa un id valido")
     }
