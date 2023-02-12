@@ -1,35 +1,22 @@
 const express = require('express')
-const morgan = require('morgan')
-const handlebars = require('express-handlebars')
-const {Server} = require('socket.io')
+//const morgan = require('morgan')
+
+const app = express()
+const server = require('http').createServer(app)
+global.io = require('socket.io')(server)
 
 const router = require('./routes/index.js')
-
+const handlebars = require('./configHandlebars.js')
 
 const port = 8080
 
-const app = express()
-
-const httpServer = app.listen(port, ()=> console.log(`listen in port ${port}`))
-const io = new Server(httpServer)
+server.listen(port, ()=> console.log(`listen in port ${port}`))
 
 app.use(express.json());
 app.use(express.urlencoded({extended: true}))
-app.use(morgan('dev'))
-
-app.engine('handlebars', handlebars.engine())
-app.set('views', __dirname+'/views')
-app.set('view engine', 'handlebars')
+//app.use(morgan('dev'))
 app.use(express.static(__dirname+'/public'))
 
 
 router(app)
-
-io.on('connection', socket => { 
-    console.log(`Nuevo cliente conectado con id ${socket.id}`)
-
-    socket.on('message', data =>{ 
-        console.log(data)
-    })
-})
-
+handlebars(app)

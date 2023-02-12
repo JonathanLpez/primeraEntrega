@@ -56,15 +56,14 @@ router.get('/:pid', async (req, res) => {
 
 // Agregar producto
 
-router.post('/', uploader.single('thumbail') , async (req, res) => {
-
-    const thumbail = req.file.path
+router.post('/',  async (req, res) => {
 
     const {
         code,
         title,
         description,
         price,
+        thumbail,
         stock,
         status
     } = req.body

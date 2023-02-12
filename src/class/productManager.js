@@ -18,7 +18,7 @@ class ProductManager {
 
     }
 
-    async addProduct(code, title, description, price, thumbail, stock = 1 , status = true) {
+    async addProduct(code, title, description, price, thumbail, stock = 1, status = true) {
 
         this.id = this.products.length + 1
 
@@ -33,15 +33,15 @@ class ProductManager {
             status
         }
 
-        const productFilter = this.products.find(prod => prod.code === product.code)
+        const productFilter = this.products.find(prod => prod.code == product.code)
 
         if (!productFilter) {
             this.products.push(product);
             const dataJson = JSON.stringify(this.products)
             await fs.writeFileSync(this.file, dataJson)
-            return `Product created with id ${product.id}`
+            return true
         } else {
-            return `El producto con code ${product.code} ya existe`
+            return false
         }
 
 
@@ -54,7 +54,7 @@ class ProductManager {
         } catch (error) {
             return 'error al leer todos los productos'
         }
-        
+
 
     }
 
@@ -76,38 +76,44 @@ class ProductManager {
 
         try {
             const filter = this.products.filter(prod => prod.id !== id)
-            this.products = filter
-            await fs.promises.writeFile(this.file, JSON.stringify(this.products))
-            return `Producto borrado con id ${id}`
+            console.log(filter.length)
+            if (filter.length === 0 ) {
+                return false
+            } else {
+                this.products = filter
+                await fs.promises.writeFile(this.file, JSON.stringify(this.products))
+                return true
+            }
+
         } catch (error) {
-            return 'error'
+            return false
         }
 
 
     }
 
-    async updateById(pid, code, title, desc, precio, img, stock, status){ 
+    async updateById(pid, code, title, desc, precio, img, stock, status) {
 
-        const prod = this.products.find(prod=> prod.id === pid)
+        const prod = this.products.find(prod => prod.id === pid)
         console.log(prod)
 
         try {
-        prod.code = code
-        prod.title = title
-        prod.description = desc
-        prod.price = precio
-        prod.thumbail = img
-        prod.stock = stock
-        prod.status = status
+            prod.code = code
+            prod.title = title
+            prod.description = desc
+            prod.price = precio
+            prod.thumbail = img
+            prod.stock = stock
+            prod.status = status
 
-        await fs.promises.writeFile(this.file, JSON.stringify(this.products))
-        return `Producto modificado con id ${prod.id}`
+            await fs.promises.writeFile(this.file, JSON.stringify(this.products))
+            return `Producto modificado con id ${prod.id}`
         } catch (error) {
             return 'Error al modificar producto'
         }
     }
 
-    
+
 
 
 }
