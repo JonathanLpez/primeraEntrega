@@ -11,53 +11,80 @@ const thumbail = document.getElementById('thumbail')
 const price = document.getElementById('price')
 const stock = document.getElementById('stock')
 
-prodAdd.addEventListener('click',(e)=>{
-    e.preventDefault()
-    if(title.value = " " || code.value ==' ' || description.value == ' ' || price.value == ' '  ){ 
-        alert("Ingresa los datos completos ; Title, Code, Description y Price")
-    } else{ 
-        const prod = { 
-            valueTitle : title.value,
-            valueCode : code.value,
-            valueDescription : description.value,
-            valueThumbail : thumbail.value,
-            valuePrice : Number(price.value),
-            valueStock : Number(stock.value)
+// Pintar lista en html
+const lista = document.getElementById('listProducts')
+
+const funcionPintarHtml = (data)=>{ 
+    data.forEach(product => {
+        let tr = document.querySelector(`tr[data-id="${product.id}"]`);
+        if (!tr) {
+            tr = document.createElement('tr');
+            tr.setAttribute('data-id', product.id);
+            for (key in product) {
+                tr.innerHTML += `<td> ${product[key]} </td>`
+            }
+            lista.appendChild(tr);
         }
-        socket.emit('add',prod)
+    })
+}
+
+socket.on('products', (data) => {
+    console.log(data)
+    funcionPintarHtml(data)
+})
+
+// Funcion btn agregar producto
+prodAdd.addEventListener('click', (e) => {
+    e.preventDefault()
+
+    if (title.value !== " " && code.value !== " " && description.value !== " " && price.value !== "") {
+        const prod = {
+            valueTitle: title.value,
+            valueCode: code.value,
+            valueDescription: description.value,
+            valueThumbail: thumbail.value,
+            valuePrice: Number(price.value),
+            valueStock: Number(stock.value)
+        }
+        socket.emit('add', prod)
+
+        title.value = ' ';
+        code.value = ' ';
+        description.value = ' ';
+        price.value = ' ';
+        stock.value = ' ';
+        thumbail.value = ' ';
+
+        socket.on('add-exitoso', (data) => {
+            alert(data)
+        })
+
+        
+
+    } else {
+        alert("Ingresa los datos completos ; Title, Code, Description y Price")
     }
 
-    title.value = ' ';
-    code.value = ' ';
-    description.value = ' ';
-    price.value = ' '; 
-    stock.value = ' ';
-    thumbail.value = ' ';
-
-    socket.on('add-exitoso', (data)=>{ 
-        alert(data)
-    })
 
 })
 
+// Datos formulario Delete
 const prodByID = document.getElementById('prodID')
 
-deleteBtn.addEventListener('click', (e)=>{
+// Funcion delete btn
+deleteBtn.addEventListener('click', (e) => {
     e.preventDefault()
     const id = prodByID.value
-    if(id != "" && id > 0){
-        socket.emit('borrar', id) 
+    if (id != "" && id > 0) {
+        socket.emit('borrar', id)
+        prodByID.value = " "
+
+        socket.on('deleted-exitoso', (data) => {
+            alert(data)
+        })
+
     } else {
         alert("Ingresa un id valido")
     }
-    prodByID.value = " "
-    
-    socket.on('deleted-exitoso', (data)=>{ 
-        alert(data)
-    })
 
 })
-
-
-
-

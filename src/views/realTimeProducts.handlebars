@@ -49,20 +49,13 @@
                         <th scope="col">TITLE</th>
                         <th scope="col">DESCRIPCION</th>
                         <th scope="col">PRECIO</th>
-                        <th scope="col">STOCK</th>
+                        <th scope="col">THUMBAIL</th>
+                        <th scope="col">PRECIO</th>
+                        <th scope="col">DISPONIBLE</th>
                     </tr>
                 </thead>
-                <tbody>
-                    {{#each products}}
-                    <tr>
-                        <th scope="row">{{this.id}}</th>
-                        <td>{{this.code}}</td>
-                        <td>{{this.title}}</td>
-                        <td>{{this.description}}</td>
-                        <td>{{this.price}}</td>
-                        <td>{{this.stock}}</td>
-                    </tr>
-                    {{/each}}
+                <tbody id="listProducts">
+          
                 </tbody>
             </table>
         </div>

@@ -77,7 +77,7 @@ class ProductManager {
         try {
             const filter = this.products.filter(prod => prod.id !== id)
             console.log(filter.length)
-            if (filter.length === 0 ) {
+            if (filter.length === -1 ) {
                 return false
             } else {
                 this.products = filter
