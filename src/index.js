@@ -5,7 +5,7 @@ const app = express()
 const server = require('http').createServer(app)
 global.io = require('socket.io')(server)
 
-const router = require('./routes/index.js')
+const router = require('./routes/router.js')
 const handlebars = require('./configHandlebars.js')
 
 const port = 8080

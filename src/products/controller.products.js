@@ -2,7 +2,7 @@ const {
     Router
 } = require('express')
 
-const uploader = require('../multer.js')
+const uploader = require('../config/multer.js')
 
 const router = Router();
 const file = 'src/products/productos.json'
