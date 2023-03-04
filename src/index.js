@@ -1,5 +1,5 @@
 const express = require('express')
-//const morgan = require('morgan')
+const morgan = require('morgan')
 
 const app = express()
 const server = require('http').createServer(app)
@@ -14,7 +14,7 @@ server.listen(port, ()=> console.log(`listen in port ${port}`))
 
 app.use(express.json());
 app.use(express.urlencoded({extended: true}))
-//app.use(morgan('dev'))
+app.use(morgan('dev'))
 app.use(express.static(__dirname+'/public'))
 
 

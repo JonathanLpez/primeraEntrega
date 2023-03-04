@@ -48,6 +48,17 @@ prodAdd.addEventListener('click', (e) => {
         }
         socket.emit('add', prod)
 
+        socket.on('add-exitoso', (data) => {
+            let tr = document.createElement('tr');
+            tr.setAttribute('data-id', product.id);
+            for (key in product) {
+                tr.innerHTML += `<td> ${product[key]} </td>`
+            }
+            document.getElementById('listProducts').appendChild(tr);
+            alert(data)
+        })
+
+
         title.value = ' ';
         code.value = ' ';
         description.value = ' ';
@@ -55,16 +66,10 @@ prodAdd.addEventListener('click', (e) => {
         stock.value = ' ';
         thumbail.value = ' ';
 
-        socket.on('add-exitoso', (data) => {
-            alert(data)
-        })
-
-
-
+     
     } else {
         alert("Ingresa los datos completos ; Title, Code, Description y Price")
     }
-
 
 })
 
@@ -78,13 +83,15 @@ deleteBtn.addEventListener('click', async (e) => {
     if (id != "" && id > 0) {
         socket.emit('borrar', id)
         prodByID.value = " "
+
         socket.on('deleted-exitoso', (data) => {
             let tr = document.querySelector(`tr[data-id="${id}"]`);
             tr.remove();
             alert(data)
         })
+        
     } else {
         alert("Ingresa un id valido")
     }
-
 })
+
